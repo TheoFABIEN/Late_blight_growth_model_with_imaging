@@ -6,4 +6,6 @@ This repository contains the code I used to segment lesions and model the growth
 
 Segmentation : the goal was to compare the performances of different segmentation approaches. Other methods are yet to be tried.
 
-Growth model : soon.
+Image registration: soon.
+
+Growth model: soon.
