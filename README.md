@@ -14,4 +14,4 @@ This repository contains the code I used to segment lesions and model the growth
 
 Demo of the model:
 
-![test_animation](https://user-images.githubusercontent.com/73390220/230041534-f4bf48a0-25e8-4fb0-8d34-4ac7cd05a82e.gif)
+![test_animation](https://user-images.githubusercontent.com/73390220/230373101-42f8cbc4-fa3d-436a-8abb-55f4ffcebd0e.gif)
