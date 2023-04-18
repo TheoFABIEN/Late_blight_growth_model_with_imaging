@@ -10,7 +10,7 @@ This repository contains the code I used to segment lesions and model the growth
 
 ***Contour detection***: find contours of the lesions after supervised segmentation for RGB images and unsupervised segmentation for Fv/Fm images. Build a table containing areas of detected contours for each leaf, according to segmentation modality, day, Phytophtora strain...and export it for further statistical analysis using R (soon avaliable on the repo).
 
-***Growth model***: Packages used by the model work on a Python 2.7 virtual environment. All the dependancies are listed in the requirements.txt file. The model itself will be uploaded soon.
+***Growth model***: To make it work, a Python 2.7 virtual environment is needed. All the dependancies are listed in the requirements.txt file. To install these, make shure you enabled the conda-forge channel. The model itself will be uploaded soon.
 
 Demo of the model:
 
