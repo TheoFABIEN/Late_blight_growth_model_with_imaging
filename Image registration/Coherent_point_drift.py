@@ -8,7 +8,7 @@ from functools import partial
 import time
 import scipy.spatial.distance as ssd
 
-def CPD(img1_o,img2_o,Multimodal=False,Multistart=False,Sym=False,Param=False,border=0, artifacts = True):
+def CPD(img1_o, img2_o, Multimodal = False, Multistart = False, Sym = False, Param = False, border = 0, artifacts = True):
     """Coherent Point Drift method for point registration, adapted to the Phytophtora dataset
 
     Args:
