@@ -77,11 +77,16 @@ def CPD_series_data(source, Multimodal = False, Multistart = True, Sym = False, 
                img = Image.open(file) 
                img = img.resize([int(.4 * s) for s in img.size])
                img = np.array(img)
-               img_new = CPD(D0,img,
-                             Multimodal = False, 
-                             Multistart=False, 
-                             Sym = Sym, 
-                             border = border)
+               
+               img_new = CPD(
+                  D0, 
+                  img, 
+                  Multimodal = False, 
+                  Multistart = False, 
+                  Sym = Sym, 
+                  border = border
+               )
+               
                ski.io.imsave(folder + '/Recalibrated_CPD' + '/' + file.rsplit('/', 1)[-1], img_new)
          Recalibrated = ski.io.imread_collection(folder + '/Recalibrated_CPD/' + '*.tif').files
          R = len(Recalibrated)
@@ -95,12 +100,17 @@ def CPD_series_data(source, Multimodal = False, Multistart = True, Sym = False, 
             # pre-registration using the idea that the leaf should be longer than wider, if in the right position:
             adjusted = redresser(Flu)   
             Flu = np.array(adjusted[0])
-            cpd = CPD(Vis, Flu, 
-                      Multimodal = True, 
-                      Multistart = Multistart, 
-                      Sym = Sym, 
-                      border = border, 
-                      Param = True)
+            
+            cpd = CPD(
+               Vis, 
+               Flu, 
+               Multimodal = True, 
+               Multistart = Multistart, 
+               Sym = Sym, 
+               border = border, 
+               Param = True
+            )
+            
             Fo_new = cpd[0]
 
             ski.io.imsave(folder + '/Recalibrated_CPD' + '/' + Fo[i].rsplit('/', 1)[-1], Fo_new)
@@ -151,19 +161,11 @@ def CPD_series_data(source, Multimodal = False, Multistart = True, Sym = False, 
             scale = np.max(Vis.shape[0:2]) / np.max(FvFm_crop.shape[0:2])
             FvFm_temp = cv2.resize(FvFm_crop, (0,0), fx = scale, fy = scale)
             
-            if cpd[3] == 1:
-               Fv_temp = ski.transform.rotate(Fv_temp, 90, resize = True)
-               Fm_temp = ski.transform.rotate(Fm_temp, 90, resize = True)
-               FvFm_temp = ski.transform.rotate(FvFm_temp, 90, resize = True)
-            elif cpd[3] == 2:
-               Fv_temp = ski.transform.rotate(Fv_temp, 180, resize = True)
-               Fm_temp = ski.transform.rotate(Fm_temp, 180, resize = True)
-               FvFm_temp = ski.transform.rotate(FvFm_temp, 180, resize = True)
-            elif cpd[3] == 3:
-               Fv_temp = ski.transform.rotate(Fv_temp, 270, resize = True)
-               Fm_temp = ski.transform.rotate(Fm_temp, 270, resize = True)
-               FvFm_temp = ski.transform.rotate(FvFm_temp, 270, resize = True)
-
+            rot_angle = cpd[3]*90
+            Fv_temp = ski.transform.rotate(Fv_temp, rot_angle, resize = True)
+            Fm_temp = ski.transform.rotate(Fm_temp, rot_angle, resize = True)
+            FvFm_temp = ski.transform.rotate(FvFm_temp, rot_angle, resize = True)
+            
             Fv_new = cv2.warpAffine(Fv_temp, 
                                     T, 
                                     dsize = (Vis.shape[1], Vis.shape[0]), 
@@ -188,6 +190,14 @@ def CPD_series_data(source, Multimodal = False, Multistart = True, Sym = False, 
       os.remove(folder + '/Recalibrated_CPD/error.txt')
 
 
-source = '/home/theo/Bureau/DATA/Fluo_Visible_Mildiou_Maj2023/Dossiers_Mildiou_Maj2023'
-
-CPD_series_data(source, Multimodal = True, Sym = False, Days = 4, border = 0)
+if __name__ == "__main__":
+   
+   source = '/home/theo/Bureau/DATA/Fluo_Visible_Mildiou_Maj2023/Dossiers_Mildiou_Maj2023'
+   
+   CPD_series_data(
+      source, 
+      Multimodal = True, 
+      Sym = False, 
+      Days = 4, 
+      border = 0
+   )
