@@ -2,7 +2,7 @@
 
 This work is still in progress.
 
-This repository contains the code I used to segment lesions and model the growth of Phytophtora infestans on leaves of Solanum tuberosum (potatoe), using both RGB images and Fv/Fm intensity images. This was done during my internship at INRAE (Rennes, France), during my second year of Master's degree.
+This repository contains the code I used to segment lesions and model the growth of *Phytophtora infestans* on leaves of *Solanum tuberosum* (potatoe), using both RGB images and Fv/Fm intensity images. This was done during my internship at INRAE (Rennes, France), during my second year of Master's degree.
 
 ***Image registration***: Coherent Point Drift method adapted to this dataset. 
 
