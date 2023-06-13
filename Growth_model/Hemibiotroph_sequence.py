@@ -1,17 +1,15 @@
-#%%
 import numpy as np 
 import skimage as ski
 import matplotlib.pyplot as plt 
 import glob
 from natsort import natsorted
 import cv2
-#%%
 
-folder = "/home/theo/Bureau/Analyses_modele/Example_sequence/*"
+folder = "/home/theo/Bureau/Model_results/Example_simulation/*"
 files = glob.glob(folder)
 files = natsorted(files)
 
-time_biotroph = 1.7
+time_biotroph = 1.7 #estimated time for an infected pixel to get necrotic
 
 
 def binarize(image):
@@ -19,7 +17,6 @@ def binarize(image):
     new_image[image >= .5] = 1
     new_image[image < .5] = 0
     return new_image
-#%%
 
 lesion_sequence = [
         np.load(img)
@@ -31,8 +28,6 @@ infected_pixels_sequence = [
         for img in lesion_sequence
 ]
 
-
-#%%
 
 mat_time_infected  = np.zeros((lesion_sequence[0].shape[0], lesion_sequence[0].shape[1]))
 
@@ -48,14 +43,14 @@ for t, infected_image in enumerate(infected_pixels_sequence):
 for img in necrosis:
     img[img == 1] = 0
 
-#%%
-#Last step : change original sequence to add necrosis:
+# Change original sequence to add necrosis:
 for i, lesion in enumerate(lesion_sequence):
     lesion[necrosis[i] == 2] = 2
 
-#%% Plot images
+    
+# Plot images
 
-#we need to get images of the leaf if we want to show its contour:
+# we need to get images of the leaf if we want to show its contour:
 contour_fold = glob.glob(
     '/home/theo/datasets/Dossiers_Mildiou_Maj2023/1_R1_Bintje_ccf_P1/Recalibrated_CPD/*'
 )
