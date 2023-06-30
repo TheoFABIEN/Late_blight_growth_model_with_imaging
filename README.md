@@ -1,4 +1,4 @@
-# Computer-vision-for-modelling-growth-of-Phytophota-infestans
+# Computer vision and modelling to study lesions caused by ***Phytophota infestans***
 
 This work is still in progress.
 
